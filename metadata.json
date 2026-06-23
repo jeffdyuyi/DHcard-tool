@@ -1,0 +1,5 @@
+{
+  "name": "匕首心卡牌工坊",
+  "description": "为《匕首之心》规则设计的卡牌生成工具。支持图片数据隐写，本地库管理与高质量导出。",
+  "requestFramePermissions": []
+}

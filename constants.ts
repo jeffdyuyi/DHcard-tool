@@ -1,0 +1,224 @@
+
+import { CardType, CardData } from './types';
+
+// Categories for the dashboard
+export enum CardCategory {
+  COLLECTION = 'collection', // Was ARSENAL
+  WORLD = 'world',
+  HERO = 'hero'
+}
+
+export const CATEGORY_CONFIG: Record<CardCategory, { label: string; description: string }> = {
+  [CardCategory.COLLECTION]: { label: "收集品", description: "装备、物品与珍奇材料" },
+  [CardCategory.WORLD]: { label: "世界织造", description: "GM 工具、环境与生态" },
+  [CardCategory.HERO]: { label: "英雄构筑", description: "角色核心数据与变身" }
+};
+
+// Reorganized tools based on user request
+export const TOOL_CATEGORIES: Record<CardCategory, CardType[]> = {
+  [CardCategory.COLLECTION]: [
+    CardType.WEAPON, 
+    CardType.ARMOR, 
+    CardType.LOOT, 
+    CardType.CONSUMABLE, 
+    CardType.MATERIAL, 
+    CardType.VEHICLE,
+    CardType.INGREDIENT, 
+    CardType.MEAL,
+    CardType.CLUE
+  ],
+  [CardCategory.WORLD]: [
+    CardType.NPC, 
+    CardType.ANCESTRY, 
+    CardType.COMMUNITY, 
+    CardType.CALAMITY, 
+    CardType.MADNESS,
+    CardType.PROPHECY,
+    CardType.QUEST
+  ],
+  [CardCategory.HERO]: [
+    CardType.CLASS, 
+    CardType.SUBCLASS, 
+    CardType.DOMAIN, 
+    CardType.STORY, 
+    CardType.TRANSFORMATION,
+    CardType.QUESTION
+  ]
+};
+
+export const TOOL_CONFIG: Record<CardType, { label: string; color: string; description: string }> = {
+  [CardType.WEAPON]: { label: "武器", color: "text-red-500", description: "创建致命的武器卡牌" },
+  [CardType.ARMOR]: { label: "护甲", color: "text-blue-500", description: "设计防御装备" },
+  [CardType.LOOT]: { label: "战利品", color: "text-yellow-500", description: "特殊的物品与宝藏" },
+  [CardType.CONSUMABLE]: { label: "消耗品", color: "text-green-500", description: "药水、卷轴与食物" },
+  [CardType.DOMAIN]: { label: "领域卡", color: "text-purple-500", description: "特殊能力与法术" },
+  [CardType.STORY]: { label: "专属", color: "text-pink-500", description: "角色的背景与使命" },
+  [CardType.CLASS]: { label: "职业", color: "text-indigo-500", description: "核心职业基础面板" },
+  [CardType.SUBCLASS]: { label: "子职", color: "text-cyan-500", description: "专精与进阶能力" },
+  [CardType.ANCESTRY]: { label: "种族", color: "text-emerald-500", description: "血统与天赋" },
+  [CardType.COMMUNITY]: { label: "社群", color: "text-orange-500", description: "文化背景与出身" },
+  [CardType.NPC]: { label: "NPC", color: "text-rose-500", description: "非敌对的非玩家角色" },
+  [CardType.CALAMITY]: { label: "灾厄", color: "text-gray-500", description: "世界性的危机" },
+  [CardType.INGREDIENT]: { label: "食材", color: "text-lime-600", description: "烹饪材料与味型骰" },
+  [CardType.MEAL]: { label: "料理", color: "text-amber-700", description: "烹饪成品与效果" },
+  [CardType.TRANSFORMATION]: { label: "转变卡", color: "text-rose-700", description: "变身与特殊形态" },
+  [CardType.MATERIAL]: { label: "材料", color: "text-stone-500", description: "怪物掉落与制作素材" },
+  [CardType.VEHICLE]: { label: "载具", color: "text-sky-600", description: "交通工具与移动堡垒" },
+  [CardType.MADNESS]: { label: "异化", color: "text-fuchsia-600", description: "理智丧失与精神症状" },
+  [CardType.CLUE]: { label: "线索", color: "text-teal-600", description: "重要的调查信息" },
+  [CardType.PROPHECY]: { label: "预言", color: "text-violet-600", description: "命运的启示与后果" },
+  [CardType.QUESTION]: { label: "问题", color: "text-indigo-600", description: "建立世界观的引导性问题" },
+  [CardType.QUEST]: { label: "任务", color: "text-amber-600", description: "设计冒险任务与赏金合约" },
+};
+
+export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
+  [CardType.WEAPON]: {
+    name: "古旧长剑", trait: "敏捷", range: "近战", damage: "d8", damageType: "物理", burden: "单手", feature: "可靠：你的攻击检定+1。", description: "一把久经沙场的利刃。", creator: "GM", owner: "战士"
+  },
+  [CardType.ARMOR]: {
+    name: "皮甲", score: "3", majorThreshold: "6", severeThreshold: "12", feature: "无声：潜行检定获得优势。", description: "轻便且坚韧。", creator: "GM", owner: "游侠"
+  },
+  [CardType.LOOT]: {
+    name: "神秘护符", feature: "每日一次，你可以重投任意一颗骰子。", description: "散发着微弱的光芒。", creator: "GM", owner: "-"
+  },
+  [CardType.CONSUMABLE]: {
+    name: "治疗药水", effect: "花费一个动作饮用，回复 1d4 HP。", description: "红色的液体，尝起来像草莓。", creator: "GM", owner: "-"
+  },
+  [CardType.DOMAIN]: {
+    name: "火球术", domainName: "元素", level: "1", category: "法术", recallCost: "2", ability: "对远距离内所有生物造成 d20 魔法伤害。", description: "经典的毁灭性法术。", creator: "GM", owner: "法师"
+  },
+  [CardType.STORY]: {
+    name: "复仇誓言", trigger: "当你对仇敌造成伤害时", effect: "标记1点压力，伤害+2。", description: "你不会忘记那一天。", creator: "GM", owner: "-"
+  },
+  [CardType.CLASS]: {
+    name: "战士", evasion: "8", hp: "6", spellcastingAttribute: "", classFeature: "战斗风格：选择一种武器类型获得专精。", hopeFeature: "花费2希望，回复1d4 HP。", description: "战场上的大师。", creator: "GM", owner: "-"
+  },
+  [CardType.SUBCLASS]: {
+    name: "狂战士", baseClass: "战士", spellcastingAttribute: "", foundationFeature: "狂暴：伤害+2，但受到伤害+1。", masteryFeature: "不灭：HP归零时，掷d20，若>10则保留1HP。", description: "怒火是你的力量源泉。", creator: "GM", owner: "-"
+  },
+  [CardType.ANCESTRY]: {
+    name: "精灵", feature1Name: "敏锐感官", feature1Desc: "察觉检定获得优势。", feature2Name: "精类血统", feature2Desc: "对魅惑效果免疫。", description: "古老而优雅的种族。", creator: "GM", owner: "-"
+  },
+  [CardType.COMMUNITY]: {
+    name: "流浪者", featureName: "街头智慧", featureDesc: "在城市中搜集情报获得优势。", demeanor: "警惕，团结，排外。", description: "四海为家。", creator: "GM", owner: "-"
+  },
+  [CardType.NPC]: {
+    name: "奥术导师", difficulty: "12", motive: "传授知识，保护学徒", description: "一位博学但有些古怪的法师，总是随身带着厚厚的典籍。", 
+    features: [{ 
+      name: "奥术束缚", 
+      choice: "战斗开始时，选择一个偏爱的玩家角色。",
+      trigger: "战斗中，位于近距离范围内、受到偏爱的玩家角色第一次受到攻击命中时。",
+      effect: "对该敌人进行一次带有 +6 调整值的攻击掷骰。成功时，强大的魔法触须使目标暂时处于 束缚 状态。"
+    }], 
+    creator: "GM", 
+    owner: "-"
+  },
+  [CardType.CALAMITY]: {
+    name: "永夜降临", effect: "所有依赖视力的检定处于劣势。每回合结束时，若不在光源附近，承受1点压力。", description: "太阳不再升起。", creator: "GM", owner: "-"
+  },
+  [CardType.INGREDIENT]: {
+    name: "发光蘑菇", 
+    flavors: [{ name: "怪味", die: "d20" }], 
+    feature: "发光：食用后身体会发出微弱的光芒，持续1小时。", 
+    description: "生长在幽暗地域的奇特真菌。", 
+    creator: "GM", 
+    owner: "-"
+  },
+  [CardType.MEAL]: {
+    name: "蘑菇炖汤", 
+    components: [
+      { name: "发光蘑菇", die: "d20" },
+      { name: "岩盐", die: "d6" }
+    ], 
+    die: "d20 + d6",
+    effect: "恢复 1d4 HP，并且在黑暗中获得优势，持续至下一次长休。", 
+    description: "虽然颜色很奇怪，但味道意外不错。", 
+    creator: "GM", 
+    owner: "-"
+  },
+  [CardType.TRANSFORMATION]: {
+    name: "吸血鬼",
+    description: "吸血鬼是拥有尖牙的不死生物，以活物之血为食。",
+    features: [
+      {
+        name: "獠牙",
+        description: "进行一次力量掷骰以啃咬一个近战范围内的目标，造成使用你熟练值的d8物理伤害。"
+      },
+      {
+        name: "饱餐",
+        description: "当使用獠牙对一个活着的生物攻击成功时，你可以标记1压力点以饱餐。放置数量等同于你使目标标记的生命点数的指示物于此卡上。你可以同时储存至多5个指示物。在进行动作掷骰前，你可以花费1指示物将恐惧骰替换为d20。当你进行长休时，移除一个指示物。若此卡上没有指示物，你的所有动作掷骰和反应掷骰都具有劣势。"
+      }
+    ],
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.MATERIAL]: {
+    name: "红龙·逆鳞",
+    source: "红龙",
+    part: "逆鳞",
+    description: "一片散发着惊人热量的鳞片，坚硬无比。",
+    features: [
+      { name: "火焰抗性", description: "以此材料制作的护甲提供火焰伤害减免。" }
+    ],
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.VEHICLE]: {
+    name: "沙海游艇",
+    description: "依靠风力在沙漠中疾驰的轻型船只。",
+    armaments: [
+      { name: "侧舷弩炮", damage: "3d8 物理" }
+    ],
+    features: [
+      { name: "沙漠适应", description: "在沙地地形移动速度加倍。" }
+    ],
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.MADNESS]: {
+    name: "偏执狂", // Symptom name
+    effect: "你不再信任任何盟友。无法接受由于“帮助”动作带来的优势骰。",
+    cureCondition: "当你被一名盟友从濒死状态救回时。",
+    description: "他们在看着我...他们都想害我...",
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.CLUE]: {
+    name: "加密信件",
+    content: "信中提到了'苍白之塔'和'午夜仪式'，落款是一个奇怪的眼睛符号。",
+    note: "似乎需要特殊的透镜才能阅读全文。",
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.PROPHECY]: {
+    name: "双星陨落",
+    content: "当两颗红色的星辰在夜空中交汇之时，旧王将陨，新王加冕。",
+    successEffect: "所有玩家恢复所有希望，并获得一次自动成功的判定。",
+    failureEffect: "所有玩家受到 1d10 精神伤害，世界进入动荡状态。",
+    description: "古老的卷轴上记载的预言。",
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.QUESTION]: {
+    name: "建立羁绊",
+    questionType: "破冰问题",
+    options: [
+      "你的角色最害怕什么？",
+      "你曾欠过谁一个巨大的人情？",
+      "在这个队伍中，你最信任谁，为什么？"
+    ],
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.QUEST]: {
+    name: "低语森林的林地救援",
+    questGiver: "银叶村村长",
+    dangerLevel: "中等 (危险骰 d8)",
+    deadline: "长休之前",
+    objectives: "1. 在低语森林深处搜寻失踪的伐木工队。\n2. 击败盘踞在森林边缘的邪恶林妖。\n3. 护送幸存的村民安全返回银叶村。",
+    reward: "100枚金币，银叶村声望值提高",
+    description: "低语森林最近变得十分不安分，有传言称见到了怪物的踪迹，被派出的伐木工已经三天没有音讯了。",
+    creator: "GM",
+    owner: "冒险者小队"
+  }
+};
