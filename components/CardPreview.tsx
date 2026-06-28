@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData } from '../types';
+import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData } from '../types';
 import { Markdown, parseInline } from './Markdown';
 
 interface Props {
@@ -742,6 +742,79 @@ const CardPreview: React.FC<Props> = ({ data, elementId }) => {
             <div className="mt-4 pt-3 border-t border-slate-200 dark:border-zinc-800/50">
               <Markdown text={w.description} className="italic text-xs text-slate-500 dark:text-zinc-500" />
             </div>
+          </>
+        );
+      }
+      case CardType.ANOMALY: {
+        const a = data as AnomalyData;
+        return (
+          <>
+            <Header title={a.name} type="异常" />
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              <KeyValue label="收容等级" value={a.containmentClass || '-'} />
+              <KeyValue label="发生源头" value={a.source || '-'} />
+            </div>
+
+            <div className="flex-grow flex flex-col gap-3">
+              <div className="bg-slate-50 dark:bg-zinc-900/40 p-3 rounded border border-slate-200 dark:border-zinc-800/50">
+                <h3 className="text-slate-800 dark:text-zinc-400 text-xs font-bold uppercase tracking-wider mb-1">收容措施</h3>
+                <Markdown text={a.procedures} className="text-xs text-slate-700 dark:text-zinc-300 leading-relaxed" />
+              </div>
+
+              {a.effects && (
+                <div className="bg-purple-50/50 dark:bg-purple-950/10 p-3 rounded border border-purple-200 dark:border-purple-900/30">
+                  <h3 className="text-purple-800 dark:text-purple-400 text-xs font-bold uppercase tracking-wider mb-1">异常效应</h3>
+                  <Markdown text={a.effects} className="text-sm text-slate-800 dark:text-zinc-200 leading-relaxed" />
+                </div>
+              )}
+
+              {a.drawback && (
+                <div className="bg-red-50/30 dark:bg-rose-950/10 p-3 border-l-4 border-red-500 dark:border-rose-700 rounded-r shadow-sm">
+                  <h3 className="text-red-800 dark:text-red-400 text-xs font-bold uppercase tracking-wider mb-1">代价与负面后果</h3>
+                  <Markdown text={a.drawback} className="text-xs font-medium text-slate-800 dark:text-zinc-200" />
+                </div>
+              )}
+            </div>
+
+            {a.description && (
+              <div className="mt-4 pt-3 border-t border-slate-200 dark:border-zinc-800/50">
+                <Markdown text={a.description} className="italic text-xs text-slate-500 dark:text-zinc-500" />
+              </div>
+            )}
+          </>
+        );
+      }
+      case CardType.STRONGHOLD: {
+        const s = data as StrongholdData;
+        return (
+          <>
+            <Header title={s.name} type="据点" />
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              <KeyValue label="据点分类" value={s.strongholdType || '-'} />
+              <KeyValue label="建造要求" value={s.requirements || '-'} />
+              {s.upkeep && <KeyValue label="维护成本" value={s.upkeep} />}
+              {s.capacity && <KeyValue label="驻守上限" value={s.capacity} />}
+            </div>
+
+            <div className="flex-grow flex flex-col gap-3">
+              <div className="bg-amber-50/50 dark:bg-amber-950/10 p-3 rounded border border-amber-200 dark:border-amber-900/30 shadow-sm flex-grow">
+                <h3 className="text-amber-800 dark:text-amber-500 text-xs font-bold uppercase tracking-wider mb-2">据点功能</h3>
+                <Markdown text={s.functions} className="text-sm text-slate-800 dark:text-zinc-200 leading-relaxed" />
+              </div>
+
+              {s.restrictions && (
+                <div className="bg-orange-50/30 dark:bg-orange-950/10 p-3 border-l-4 border-orange-500 dark:border-orange-600 rounded-r shadow-sm">
+                  <h3 className="text-orange-800 dark:text-orange-400 text-xs font-bold uppercase tracking-wider mb-1">特殊限制</h3>
+                  <Markdown text={s.restrictions} className="text-xs text-slate-700 dark:text-zinc-300 leading-relaxed" />
+                </div>
+              )}
+            </div>
+
+            {s.description && (
+              <div className="mt-4 pt-3 border-t border-slate-200 dark:border-zinc-800/50">
+                <Markdown text={s.description} className="italic text-xs text-slate-500 dark:text-zinc-500" />
+              </div>
+            )}
           </>
         );
       }

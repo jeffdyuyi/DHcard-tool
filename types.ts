@@ -23,7 +23,9 @@ export enum CardType {
   QUESTION = 'question',
   QUEST = 'quest',
   SUB_WEAPON = 'subweapon',
-  WHEELCHAIR = 'wheelchair'
+  WHEELCHAIR = 'wheelchair',
+  ANOMALY = 'anomaly',
+  STRONGHOLD = 'stronghold'
 }
 
 export interface BaseCardData {
@@ -226,6 +228,23 @@ export interface WheelchairData extends BaseCardData {
   consequences: string;
 }
 
+export interface AnomalyData extends BaseCardData {
+  containmentClass: string;
+  source: string;
+  procedures: string;
+  effects: string;
+  drawback: string;
+}
+
+export interface StrongholdData extends BaseCardData {
+  strongholdType: string;
+  requirements: string;
+  functions: string;
+  upkeep: string;
+  capacity: string;
+  restrictions: string;
+}
+
 // Union type for all card data
 export type CardData = 
   | WeaponData 
@@ -251,7 +270,9 @@ export type CardData =
   | QuestionData
   | QuestData
   | SubWeaponData
-  | WheelchairData;
+  | WheelchairData
+  | AnomalyData
+  | StrongholdData;
 
 export interface LibraryItem {
   id: string;

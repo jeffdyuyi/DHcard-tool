@@ -25,6 +25,8 @@ export const TOOL_CATEGORIES: Record<CardCategory, CardType[]> = {
     CardType.MATERIAL, 
     CardType.VEHICLE,
     CardType.WHEELCHAIR,
+    CardType.ANOMALY,
+    CardType.STRONGHOLD,
     CardType.INGREDIENT, 
     CardType.MEAL,
     CardType.CLUE
@@ -68,6 +70,8 @@ export const TOOL_CONFIG: Record<CardType, { label: string; color: string; descr
   [CardType.MATERIAL]: { label: "材料", color: "text-stone-500", description: "怪物掉落与制作素材" },
   [CardType.VEHICLE]: { label: "载具", color: "text-sky-600", description: "交通工具与移动堡垒" },
   [CardType.WHEELCHAIR]: { label: "战斗轮椅", color: "text-sky-500", description: "设计极富战术机动性的战斗轮椅装备" },
+  [CardType.ANOMALY]: { label: "异常", color: "text-purple-500", description: "诡异收容物与超自然奇异现象" },
+  [CardType.STRONGHOLD]: { label: "据点", color: "text-amber-700", description: "营地、要塞等特殊功能建筑与安全区" },
   [CardType.MADNESS]: { label: "异化", color: "text-fuchsia-600", description: "理智丧失与精神症状" },
   [CardType.CLUE]: { label: "线索", color: "text-teal-600", description: "重要的调查信息" },
   [CardType.PROPHECY]: { label: "预言", color: "text-violet-600", description: "命运的启示与后果" },
@@ -197,6 +201,29 @@ export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
     description: "在《匕首之心》中为行动受限的角色量身定制的轻型机动战斗轮椅，在保证高机动性的同时具备防卫性物理杀伤力。",
     creator: "Mark Thompson",
     owner: "-"
+  },
+  [CardType.ANOMALY]: {
+    name: "无光之镜",
+    containmentClass: "欧几里得 (Euclid)",
+    source: "深渊裂隙",
+    procedures: "必须放置在完全不透光的黑曜石匣中，任何时候不得用肉眼直接注视镜面。",
+    effects: "折射：当被激活时，可以投射出一个与目标完全相同的幻影，持续1分钟。",
+    drawback: "吸魂：每次激活，使用者必须标记 1 点压力，否则将永久失去 1点最大生命值。",
+    description: "一面边缘饰有古老符文的黑框铜镜，镜中照出的景象总是比现实慢半拍。",
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.STRONGHOLD]: {
+    name: "红枫避难所",
+    strongholdType: "大型（整体）",
+    requirements: "石料 x20, 木材 x30, 铁矿石 x5",
+    functions: "• 休憩点：在此进行长休时，全员额外恢复 1点压力点。\n• 简易工坊：可在此制作普通等级的药剂与消耗品。",
+    upkeep: "每周 15 枚金币 或 3 单位食物",
+    capacity: "最多容纳 10 名非战斗成员 / 4 名驻守人员",
+    restrictions: "位置固定：据点无法移动。若暴露在敌人视野中可能遭遇突袭。",
+    description: "坐落在红枫谷峭壁上的半隐藏式要塞，地势险要，易守难攻。",
+    creator: "GM",
+    owner: "冒险者公会"
   },
   [CardType.MADNESS]: {
     name: "偏执狂", // Symptom name

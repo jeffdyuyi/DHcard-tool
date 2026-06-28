@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData } from '../types';
+import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData } from '../types';
 import { TOOL_CONFIG } from '../constants';
 import { Plus, Trash2 } from 'lucide-react';
 import RichTextArea from './RichTextArea';
@@ -495,6 +495,45 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
             <TextArea label="核心特性" value={w.feature || ''} onChange={v => handleChange('feature', v)} placeholder="例如: 快速：当你进行攻击时..." />
             <TextArea label="动作与移动" value={w.actions || ''} onChange={v => handleChange('actions', v)} placeholder="动作示例描述..." />
             <TextArea label="判定后果" value={w.consequences || ''} onChange={v => handleChange('consequences', v)} placeholder="判定后果示例描述..." />
+          </>
+        );
+      }
+      case CardType.ANOMALY: {
+        const a = data as AnomalyData;
+        return (
+          <>
+            <div className="grid grid-cols-2 gap-4 col-span-2">
+              <Input label="收容等级" value={a.containmentClass || ''} onChange={v => handleChange('containmentClass', v)} placeholder="例如: 欧几里得 (Euclid)" />
+              <Input label="发生源头" value={a.source || ''} onChange={v => handleChange('source', v)} placeholder="例如: 深渊裂隙" />
+            </div>
+            <TextArea label="收容措施" value={a.procedures || ''} onChange={v => handleChange('procedures', v)} placeholder="必须放置在完全不透光的黑曜石匣中..." />
+            <TextArea label="异常效应 (可选)" value={a.effects || ''} onChange={v => handleChange('effects', v)} placeholder="折射：当被激活时，可以投射出一个与目标完全相同的幻影..." />
+            <TextArea label="代价与负面后果 (可选)" value={a.drawback || ''} onChange={v => handleChange('drawback', v)} placeholder="吸魂：每次激活，使用者必须标记 1 点压力..." />
+          </>
+        );
+      }
+      case CardType.STRONGHOLD: {
+        const s = data as StrongholdData;
+        return (
+          <>
+            <div className="col-span-2">
+              <label className="block text-xs font-bold text-slate-700 dark:text-zinc-400 mb-1">据点分类</label>
+              <select
+                className="w-full bg-white dark:bg-zinc-950 border border-slate-300 dark:border-zinc-700 rounded px-3 py-2 text-sm text-slate-800 dark:text-zinc-100"
+                value={s.strongholdType || ''}
+                onChange={e => handleChange('strongholdType', e.target.value)}
+              >
+                <option value="大型（整体）">大型（整体）</option>
+                <option value="小型（房间）">小型（房间）</option>
+              </select>
+            </div>
+            <Input label="建造要求" value={s.requirements || ''} onChange={v => handleChange('requirements', v)} placeholder="例如: 石料 x20, 木材 x30" full />
+            <TextArea label="据点功能" value={s.functions || ''} onChange={v => handleChange('functions', v)} placeholder="据点所能提供的休息、制造或防御加成描述..." />
+            <div className="grid grid-cols-2 gap-4 col-span-2">
+              <Input label="维护成本 (可选)" value={s.upkeep || ''} onChange={v => handleChange('upkeep', v)} placeholder="例如: 每周 15 枚金币" />
+              <Input label="驻守上限 (可选)" value={s.capacity || ''} onChange={v => handleChange('capacity', v)} placeholder="例如: 10名非战斗成员 / 4名驻守人员" />
+            </div>
+            <TextArea label="特殊限制 (可选)" value={s.restrictions || ''} onChange={v => handleChange('restrictions', v)} placeholder="据点的负面效果或限制，例如：位置固定，无法移动..." />
           </>
         );
       }
