@@ -38,7 +38,8 @@ export const TOOL_CATEGORIES: Record<CardCategory, CardType[]> = {
     CardType.CALAMITY, 
     CardType.MADNESS,
     CardType.PROPHECY,
-    CardType.QUEST
+    CardType.QUEST,
+    CardType.ENVIRONMENT
   ],
   [CardCategory.HERO]: [
     CardType.CLASS, 
@@ -77,6 +78,7 @@ export const TOOL_CONFIG: Record<CardType, { label: string; color: string; descr
   [CardType.PROPHECY]: { label: "预言", color: "text-violet-600", description: "命运的启示与后果" },
   [CardType.QUESTION]: { label: "问题", color: "text-indigo-600", description: "建立世界观的引导性问题" },
   [CardType.QUEST]: { label: "任务", color: "text-amber-600", description: "设计冒险任务与赏金合约" },
+  [CardType.ENVIRONMENT]: { label: "环境", color: "text-teal-500", description: "设计场景环境与地形江山" },
 };
 
 export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
@@ -270,5 +272,27 @@ export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
     description: "低语森林最近变得十分不安分，有传言称见到了怪物的踪迹，被派出的伐木工已经三天没有音讯了。",
     creator: "GM",
     owner: "冒险者小队"
+  },
+  [CardType.ENVIRONMENT]: {
+    name: "汹涌河流",
+    tier: "2",
+    envType: "险境型",
+    tendency: "将你冲走或溺毙",
+    difficulty: "10",
+    potentialEnemies: "河妖、巨型鳄鱼、水元素",
+    description: "湍急的河水在乱石间奔腾怒吼，白色的泡沫翻涌不息。",
+    features: [
+      {
+        name: "暗流 Undertow",
+        type: "被动",
+        isFear: false,
+        fearCost: "",
+        description: "在河流中移动时，须通过一次难度为该环境的力量或敏捷检定，否则被水流冲离原位至远距离外的随机方向。",
+        guidingQuestion: "河床上散落着哪些小物件和饰品？这片水域是否存在掠食者？"
+      }
+    ],
+    creator: "GM",
+    owner: "-"
   }
+
 };

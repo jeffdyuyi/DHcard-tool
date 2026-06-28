@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData } from '../types';
+import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData, EnvironmentData } from '../types';
 import { Markdown, parseInline } from './Markdown';
 
 interface Props {
@@ -818,14 +818,111 @@ const CardPreview: React.FC<Props> = ({ data, elementId }) => {
           </>
         );
       }
-      default: 
+      default:
         return null;
     }
   };
 
+  // --- ENVIRONMENT CARD RENDER ---
+  const renderEnvironmentContent = () => {
+    const env = data as EnvironmentData;
+    const ENV_TYPE_COLORS: Record<string, string> = {
+      '探索型': 'text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-950/20',
+      '社交型': 'text-blue-700 dark:text-blue-400 border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950/20',
+      '险境型': 'text-red-700 dark:text-red-400 border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-950/20',
+      '事件型': 'text-violet-700 dark:text-violet-400 border-violet-300 dark:border-violet-700 bg-violet-50 dark:bg-violet-950/20',
+    };
+    const typeColor = ENV_TYPE_COLORS[env.envType] || ENV_TYPE_COLORS['险境型'];
+
+    return (
+      <>
+        {/* Header */}
+        <div className="border-b-2 border-teal-700/30 dark:border-teal-500/40 pb-3 mb-4">
+          <div className="flex justify-between items-start">
+            <div>
+              <h2 className="text-2xl font-serif font-bold text-teal-900 dark:text-teal-300 tracking-wide">{env.name}</h2>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-xs text-slate-500 dark:text-zinc-500 uppercase tracking-wider">位阶 {env.tier}</span>
+                <span className={`text-xs font-bold px-2 py-0.5 rounded border ${typeColor}`}>{env.envType}</span>
+              </div>
+            </div>
+            <span className="text-[10px] uppercase tracking-widest text-slate-400 dark:text-zinc-600 font-serif mt-1 shrink-0">环境</span>
+          </div>
+          {env.description && (
+            <p className="text-sm italic text-slate-600 dark:text-zinc-400 mt-2 font-serif">{env.description}</p>
+          )}
+        </div>
+
+        {/* Tendency */}
+        {env.tendency && (
+          <div className="mb-3 px-3 py-2 border-l-4 border-teal-500 dark:border-teal-600 bg-teal-50/50 dark:bg-teal-950/10 rounded-r">
+            <span className="text-[10px] font-bold text-teal-700 dark:text-teal-500 uppercase tracking-wider">趋向</span>
+            <p className="text-sm text-slate-800 dark:text-zinc-200">{env.tendency}</p>
+          </div>
+        )}
+
+        {/* Stats row: difficulty + potential enemies */}
+        <div className="grid grid-cols-2 gap-2 mb-4">
+          <div className="flex flex-col items-center p-2 bg-slate-50 dark:bg-zinc-900 rounded border border-slate-200 dark:border-zinc-800 shadow-sm">
+            <span className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase mb-0.5 tracking-wide">难度</span>
+            <span className="text-2xl font-bold text-teal-800 dark:text-teal-400">{env.difficulty || '-'}</span>
+          </div>
+          <div className="flex flex-col p-2 bg-slate-50 dark:bg-zinc-900 rounded border border-slate-200 dark:border-zinc-800 shadow-sm">
+            <span className="text-[10px] text-slate-500 dark:text-zinc-500 uppercase mb-0.5 tracking-wide">潜在敌人</span>
+            <span className="text-xs text-slate-800 dark:text-zinc-300 leading-snug">{env.potentialEnemies || '-'}</span>
+          </div>
+        </div>
+
+        {/* Features */}
+        {(env.features || []).length > 0 && (
+          <div className="space-y-3 flex-grow">
+            <h3 className="text-teal-800 dark:text-teal-500 text-[10px] font-bold uppercase tracking-widest border-b border-teal-200 dark:border-teal-800/50 pb-1">特性</h3>
+            {env.features.map((f, idx) => (
+              <div
+                key={idx}
+                className={`p-3 rounded border shadow-sm ${
+                  f.isFear
+                    ? 'bg-red-50/60 dark:bg-red-950/20 border-red-300 dark:border-red-800/60'
+                    : 'bg-slate-50 dark:bg-zinc-900/40 border-slate-200 dark:border-zinc-800/50'
+                }`}
+              >
+                {/* Feature header */}
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className={`font-bold text-sm ${
+                    f.isFear ? 'text-red-800 dark:text-red-300' : 'text-slate-900 dark:text-zinc-100'
+                  }`}>
+                    {f.isFear && (
+                      <span className="inline-block text-[10px] font-bold uppercase tracking-wider bg-red-700 dark:bg-red-800 text-white px-1 py-0.5 rounded mr-1.5">恐惧 {f.fearCost}pt</span>
+                    )}
+                    {parseInline(f.name)}
+                  </span>
+                  <span className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${
+                    f.type === '动作' ? 'bg-orange-100 dark:bg-orange-950/40 text-orange-700 dark:text-orange-400' :
+                    f.type === '反应' ? 'bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400' :
+                    'bg-slate-200 dark:bg-zinc-800 text-slate-600 dark:text-zinc-400'
+                  }`}>
+                    {f.type}
+                  </span>
+                </div>
+                {/* Description */}
+                <Markdown text={f.description} className="text-xs text-slate-800 dark:text-zinc-200 leading-relaxed" />
+                {/* Guiding question */}
+                {f.guidingQuestion && (
+                  <p className="mt-2 text-[11px] italic text-teal-700 dark:text-teal-500 border-t border-teal-100 dark:border-teal-900/50 pt-1.5">{f.guidingQuestion}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </>
+    );
+  };
+
+  const isEnvironment = data.type === CardType.ENVIRONMENT;
+
   return (
     <Wrapper id={elementId || "card-preview"}>
-      {renderContent()}
+      {isEnvironment ? renderEnvironmentContent() : renderContent()}
       <Footer creator={data.creator} owner={data.owner} />
     </Wrapper>
   );

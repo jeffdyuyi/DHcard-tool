@@ -25,7 +25,8 @@ export enum CardType {
   SUB_WEAPON = 'subweapon',
   WHEELCHAIR = 'wheelchair',
   ANOMALY = 'anomaly',
-  STRONGHOLD = 'stronghold'
+  STRONGHOLD = 'stronghold',
+  ENVIRONMENT = 'environment'
 }
 
 export interface BaseCardData {
@@ -245,6 +246,24 @@ export interface StrongholdData extends BaseCardData {
   restrictions: string;
 }
 
+export interface EnvironmentFeature {
+  name: string;
+  type: string;     // 动作 / 反应 / 被动
+  isFear: boolean;  // 是否为恐惧特性
+  fearCost: string; // 恐惧点花费 (仅 isFear 时有效)
+  description: string;
+  guidingQuestion: string; // 引导问题
+}
+
+export interface EnvironmentData extends BaseCardData {
+  tier: string;           // 位阶
+  envType: string;        // 探索型 / 社交型 / 险境型 / 事件型
+  tendency: string;       // 趋向
+  difficulty: string;     // 难度
+  potentialEnemies: string; // 潜在敌人
+  features: EnvironmentFeature[];
+}
+
 // Union type for all card data
 export type CardData = 
   | WeaponData 
@@ -272,7 +291,8 @@ export type CardData =
   | SubWeaponData
   | WheelchairData
   | AnomalyData
-  | StrongholdData;
+  | StrongholdData
+  | EnvironmentData;
 
 export interface LibraryItem {
   id: string;

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData } from '../types';
+import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData, EnvironmentData, EnvironmentFeature } from '../types';
 import { TOOL_CONFIG } from '../constants';
 import { Plus, Trash2 } from 'lucide-react';
 import RichTextArea from './RichTextArea';
@@ -542,6 +542,146 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
     }
   };
 
+  // Environment card editor case — inserted before the default
+  const renderEnvironmentEditor = () => {
+    const env = data as EnvironmentData;
+    return (
+      <>
+        <div className="grid grid-cols-2 gap-4 col-span-2">
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">位阶</label>
+            <input
+              type="text"
+              value={env.tier || ''}
+              onChange={e => handleChange('tier', e.target.value)}
+              className="bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded px-3 py-2 text-slate-900 dark:text-zinc-200 focus:outline-none focus:border-teal-500 transition-colors"
+              placeholder="例如: 2"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">环境类型</label>
+            <select
+              value={env.envType || '险境型'}
+              onChange={e => handleChange('envType', e.target.value)}
+              className="bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded px-3 py-2 text-slate-900 dark:text-zinc-200 focus:outline-none focus:border-teal-500 transition-colors"
+            >
+              <option value="探索型">探索型 Explorations</option>
+              <option value="社交型">社交型 Socials</option>
+              <option value="险境型">险境型 Traversals</option>
+              <option value="事件型">事件型 Events</option>
+            </select>
+          </div>
+        </div>
+        <TextArea label="趋向" value={env.tendency || ''} onChange={v => handleChange('tendency', v)} placeholder="例如：将你冲走或溺毙" />
+        <div className="grid grid-cols-2 gap-4 col-span-2">
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">难度</label>
+            <input
+              type="text"
+              value={env.difficulty || ''}
+              onChange={e => handleChange('difficulty', e.target.value)}
+              className="bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded px-3 py-2 text-slate-900 dark:text-zinc-200 focus:outline-none focus:border-teal-500 transition-colors"
+              placeholder="例如: 10"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">潜在敌人</label>
+            <input
+              type="text"
+              value={env.potentialEnemies || ''}
+              onChange={e => handleChange('potentialEnemies', e.target.value)}
+              className="bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded px-3 py-2 text-slate-900 dark:text-zinc-200 focus:outline-none focus:border-teal-500 transition-colors"
+              placeholder="例如: 河妖、巨型鳄鱼"
+            />
+          </div>
+        </div>
+        <ListEditor<EnvironmentFeature>
+          title="环境特性"
+          items={env.features || []}
+          onAdd={() => handleChange('features', [...(env.features || []), {
+            name: '新特性',
+            type: '动作',
+            isFear: false,
+            fearCost: '1',
+            description: '',
+            guidingQuestion: ''
+          }])}
+          onRemove={i => handleChange('features', (env.features || []).filter((_, idx) => idx !== i))}
+          onUpdate={(i, k, v) => {
+            const list = [...(env.features || [])];
+            list[i] = { ...list[i], [k]: v };
+            handleChange('features', list);
+          }}
+          renderItem={(f, i, update) => (
+            <div className="bg-slate-50 dark:bg-zinc-900/50 p-3 rounded border border-slate-200 dark:border-zinc-800 space-y-2">
+              {/* Feature name and type row */}
+              <div className="flex gap-2 items-center mr-6">
+                <input
+                  className="flex-grow bg-white dark:bg-zinc-950 border border-slate-300 dark:border-zinc-700 rounded px-2 py-1 text-sm font-bold text-slate-900 dark:text-zinc-200"
+                  value={f.name}
+                  onChange={e => update('name', e.target.value)}
+                  placeholder="特性名称 (例如: 暗流 Undertow)"
+                />
+                <select
+                  value={f.type}
+                  onChange={e => update('type', e.target.value)}
+                  className="w-20 bg-white dark:bg-zinc-950 border border-slate-300 dark:border-zinc-700 rounded px-1 py-1 text-xs text-slate-900 dark:text-zinc-200"
+                >
+                  <option value="动作">动作</option>
+                  <option value="反应">反应</option>
+                  <option value="被动">被动</option>
+                </select>
+              </div>
+              {/* Fear toggle */}
+              <div className="flex items-center gap-3">
+                <label className="flex items-center gap-1.5 cursor-pointer text-xs text-slate-600 dark:text-zinc-400">
+                  <input
+                    type="checkbox"
+                    checked={!!f.isFear}
+                    onChange={e => update('isFear', e.target.checked)}
+                    className="accent-red-600"
+                  />
+                  <span className="font-bold text-red-700 dark:text-red-400">恐惧特性</span>
+                </label>
+                {f.isFear && (
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs text-slate-500 dark:text-zinc-500">花费</span>
+                    <input
+                      type="text"
+                      value={f.fearCost || '1'}
+                      onChange={e => update('fearCost', e.target.value)}
+                      className="w-10 bg-white dark:bg-zinc-950 border border-red-300 dark:border-red-800 rounded px-1 py-0.5 text-xs text-center text-red-800 dark:text-red-300 font-bold"
+                      placeholder="1"
+                    />
+                    <span className="text-xs text-slate-500 dark:text-zinc-500">恐惧点</span>
+                  </div>
+                )}
+              </div>
+              {/* Description */}
+              <RichTextArea
+                inline={true}
+                minHeight="min-h-[70px]"
+                value={f.description}
+                onChange={v => update('description', v)}
+                placeholder="特性效果描述..."
+              />
+              {/* Guiding question */}
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-teal-600 dark:text-teal-500 uppercase tracking-wider">引导问题 (斜体显示)</label>
+                <input
+                  className="w-full bg-white dark:bg-zinc-950 border border-teal-300 dark:border-teal-800 rounded px-2 py-1 text-xs text-slate-600 dark:text-zinc-400 italic"
+                  value={f.guidingQuestion || ''}
+                  onChange={e => update('guidingQuestion', e.target.value)}
+                  placeholder="此地点曾发生过什么？留下了哪些痕迹？"
+                />
+              </div>
+            </div>
+          )}
+        />
+      </>
+    );
+  };
+
   return (
     <div className="space-y-6">
       <div className="border-b border-slate-200 dark:border-zinc-800 pb-4">
@@ -564,10 +704,14 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
            <TextArea label="风味描述" value={data.description} onChange={v => handleChange('description', v)} placeholder="关于此生物的描述..." />
         )}
         
-        {renderFields()}
+        {data.type === CardType.ENVIRONMENT ? renderEnvironmentEditor() : renderFields()}
         
-        {data.type !== CardType.TRANSFORMATION && data.type !== CardType.MADNESS && data.type !== CardType.CLUE && (
+        {data.type !== CardType.TRANSFORMATION && data.type !== CardType.MADNESS && data.type !== CardType.CLUE && data.type !== CardType.ENVIRONMENT && (
           <TextArea label="描述/风味文字" value={data.description} onChange={v => handleChange('description', v)} />
+        )}
+
+        {data.type === CardType.ENVIRONMENT && (
+          <TextArea label="描述/风味文字" value={data.description} onChange={v => handleChange('description', v)} placeholder="一行富有画面感的文字描述此环境..." />
         )}
 
         <div className="col-span-2 grid grid-cols-2 gap-4 pt-4 border-t border-slate-200 dark:border-zinc-800">
