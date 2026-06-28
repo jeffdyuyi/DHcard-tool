@@ -18,6 +18,7 @@ export const CATEGORY_CONFIG: Record<CardCategory, { label: string; description:
 export const TOOL_CATEGORIES: Record<CardCategory, CardType[]> = {
   [CardCategory.COLLECTION]: [
     CardType.WEAPON, 
+    CardType.SUB_WEAPON,
     CardType.ARMOR, 
     CardType.LOOT, 
     CardType.CONSUMABLE, 
@@ -48,6 +49,7 @@ export const TOOL_CATEGORIES: Record<CardCategory, CardType[]> = {
 
 export const TOOL_CONFIG: Record<CardType, { label: string; color: string; description: string }> = {
   [CardType.WEAPON]: { label: "武器", color: "text-red-500", description: "创建致命的武器卡牌" },
+  [CardType.SUB_WEAPON]: { label: "副武器", color: "text-rose-400", description: "设计辅助战斗的副武器" },
   [CardType.ARMOR]: { label: "护甲", color: "text-blue-500", description: "设计防御装备" },
   [CardType.LOOT]: { label: "战利品", color: "text-yellow-500", description: "特殊的物品与宝藏" },
   [CardType.CONSUMABLE]: { label: "消耗品", color: "text-green-500", description: "药水、卷轴与食物" },
@@ -74,6 +76,9 @@ export const TOOL_CONFIG: Record<CardType, { label: string; color: string; descr
 export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
   [CardType.WEAPON]: {
     name: "古旧长剑", trait: "敏捷", range: "近战", damage: "d8", damageType: "物理", burden: "单手", feature: "可靠：你的攻击检定+1。", description: "一把久经沙场的利刃。", creator: "GM", owner: "战士"
+  },
+  [CardType.SUB_WEAPON]: {
+    name: "古旧匕首", trait: "敏捷", range: "近战/投掷", damage: "d6", damageType: "物理", burden: "轻型", feature: "精准：投掷攻击时，暴击阈值-1。", description: "易于隐藏的防身副手武器。", creator: "GM", owner: "盗贼"
   },
   [CardType.ARMOR]: {
     name: "皮甲", score: "3", majorThreshold: "6", severeThreshold: "12", feature: "无声：潜行检定获得优势。", description: "轻便且坚韧。", creator: "GM", owner: "游侠"

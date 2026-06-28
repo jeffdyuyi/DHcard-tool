@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData } from '../types';
+import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData } from '../types';
 import { Markdown, parseInline } from './Markdown';
 
 interface Props {
@@ -91,11 +91,12 @@ const CardPreview: React.FC<Props> = ({ data, elementId }) => {
 
   const renderContent = () => {
     switch (data.type) {
-      case CardType.WEAPON: {
+      case CardType.WEAPON:
+      case CardType.SUB_WEAPON: {
         const d = data as WeaponData;
         return (
           <>
-            <Header title={d.name} type="武器" />
+            <Header title={d.name} type={d.type === CardType.SUB_WEAPON ? "副武器" : "武器"} />
             <div className="grid grid-cols-2 gap-2 mb-4">
               <KeyValue label="属性" value={d.trait} />
               <KeyValue label="距离" value={d.range} />

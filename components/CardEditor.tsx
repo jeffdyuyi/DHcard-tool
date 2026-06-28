@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData } from '../types';
+import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData } from '../types';
 import { TOOL_CONFIG } from '../constants';
 import { Plus, Trash2 } from 'lucide-react';
 import RichTextArea from './RichTextArea';
@@ -83,6 +83,7 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
   const renderFields = () => {
     switch (data.type) {
       case CardType.WEAPON:
+      case CardType.SUB_WEAPON:
         return (
           <>
             <Input label="属性" value={(data as any).trait} onChange={v => handleChange('trait', v)} placeholder="例如: 敏捷" />

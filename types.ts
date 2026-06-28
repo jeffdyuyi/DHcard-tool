@@ -21,7 +21,8 @@ export enum CardType {
   CLUE = 'clue',
   PROPHECY = 'prophecy',
   QUESTION = 'question',
-  QUEST = 'quest'
+  QUEST = 'quest',
+  SUB_WEAPON = 'subweapon'
 }
 
 export interface BaseCardData {
@@ -202,6 +203,15 @@ export interface QuestData extends BaseCardData {
   reward: string;
 }
 
+export interface SubWeaponData extends BaseCardData {
+  trait: string;
+  range: string;
+  damage: string;
+  damageType: string;
+  burden: string;
+  feature: string;
+}
+
 // Union type for all card data
 export type CardData = 
   | WeaponData 
@@ -225,7 +235,8 @@ export type CardData =
   | ClueData
   | ProphecyData
   | QuestionData
-  | QuestData;
+  | QuestData
+  | SubWeaponData;
 
 export interface LibraryItem {
   id: string;

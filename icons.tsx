@@ -3,11 +3,12 @@ import React from 'react';
 import { CardType } from './types';
 import { 
   Sword, Shield, Gem, FlaskConical, Flame, ScrollText, Crown, Sparkles, Dna, Tent, UserCircle2, Skull, Carrot, Utensils,
-  Moon as MoonIcon, Hammer, Ship, Brain, Search, Eye, HelpCircle, Compass
+  Moon as MoonIcon, Hammer, Ship, Brain, Search, Eye, HelpCircle, Compass, Swords
 } from 'lucide-react';
 
 export const TOOL_ICONS: Record<CardType, React.ReactNode> = {
   [CardType.WEAPON]: <Sword size={24} strokeWidth={1.5} />,
+  [CardType.SUB_WEAPON]: <Swords size={24} strokeWidth={1.5} />,
   [CardType.ARMOR]: <Shield size={24} strokeWidth={1.5} />,
   [CardType.LOOT]: <Gem size={24} strokeWidth={1.5} />,
   [CardType.CONSUMABLE]: <FlaskConical size={24} strokeWidth={1.5} />,
