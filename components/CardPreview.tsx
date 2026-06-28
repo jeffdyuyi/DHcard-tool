@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData } from '../types';
+import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData } from '../types';
 import { Markdown, parseInline } from './Markdown';
 
 interface Props {
@@ -696,6 +696,51 @@ const CardPreview: React.FC<Props> = ({ data, elementId }) => {
 
             <div className="mt-4 pt-3 border-t border-slate-200 dark:border-zinc-800/50">
               <Markdown text={d.description} className="italic text-xs text-slate-500 dark:text-zinc-500" />
+            </div>
+          </>
+        );
+      }
+      case CardType.WHEELCHAIR: {
+        const w = data as WheelchairData;
+        return (
+          <>
+            <Header title={w.name} type="战斗轮椅" />
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              <KeyValue label="框架型号" value={w.frameType || '-'} />
+              <KeyValue label="位阶" value={w.tier || '-'} />
+              <KeyValue label="属性" value={w.trait || '-'} />
+              <KeyValue label="距离" value={w.range || '-'} />
+              <KeyValue label="伤害骰" value={w.damage || '-'} />
+              <KeyValue label="负荷" value={w.burden || '-'} />
+              <KeyValue label="闪避修正" value={w.evasionMod || '-'} full />
+            </div>
+
+            <div className="flex-grow flex flex-col gap-3">
+              {w.feature && (
+                <div className="bg-amber-50/50 dark:bg-amber-950/10 p-3 rounded border border-amber-200 dark:border-amber-900/30 shadow-sm">
+                  <h3 className="text-amber-800 dark:text-amber-500 text-xs font-bold uppercase tracking-wider mb-1">核心特性</h3>
+                  <Markdown text={w.feature} className="text-sm text-slate-800 dark:text-zinc-200" />
+                </div>
+              )}
+              
+              <div className="grid grid-cols-1 gap-2">
+                {w.actions && (
+                  <div className="p-3 bg-slate-50 dark:bg-zinc-900/40 rounded border border-slate-200 dark:border-zinc-800/50">
+                    <h3 className="text-blue-900 dark:text-cyan-400 text-xs font-bold uppercase tracking-wider mb-1">动作与移动</h3>
+                    <Markdown text={w.actions} className="text-xs text-slate-700 dark:text-zinc-300 leading-relaxed" />
+                  </div>
+                )}
+                {w.consequences && (
+                  <div className="p-3 bg-red-50/30 dark:bg-rose-950/10 rounded border border-red-100 dark:border-rose-900/30">
+                    <h3 className="text-red-800 dark:text-red-400 text-xs font-bold uppercase tracking-wider mb-1">后果描述</h3>
+                    <Markdown text={w.consequences} className="text-xs text-slate-700 dark:text-zinc-300 leading-relaxed" />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200 dark:border-zinc-800/50">
+              <Markdown text={w.description} className="italic text-xs text-slate-500 dark:text-zinc-500" />
             </div>
           </>
         );

@@ -24,6 +24,7 @@ export const TOOL_CATEGORIES: Record<CardCategory, CardType[]> = {
     CardType.CONSUMABLE, 
     CardType.MATERIAL, 
     CardType.VEHICLE,
+    CardType.WHEELCHAIR,
     CardType.INGREDIENT, 
     CardType.MEAL,
     CardType.CLUE
@@ -66,6 +67,7 @@ export const TOOL_CONFIG: Record<CardType, { label: string; color: string; descr
   [CardType.TRANSFORMATION]: { label: "转变卡", color: "text-rose-700", description: "变身与特殊形态" },
   [CardType.MATERIAL]: { label: "材料", color: "text-stone-500", description: "怪物掉落与制作素材" },
   [CardType.VEHICLE]: { label: "载具", color: "text-sky-600", description: "交通工具与移动堡垒" },
+  [CardType.WHEELCHAIR]: { label: "战斗轮椅", color: "text-sky-500", description: "设计极富战术机动性的战斗轮椅装备" },
   [CardType.MADNESS]: { label: "异化", color: "text-fuchsia-600", description: "理智丧失与精神症状" },
   [CardType.CLUE]: { label: "线索", color: "text-teal-600", description: "重要的调查信息" },
   [CardType.PROPHECY]: { label: "预言", color: "text-violet-600", description: "命运的启示与后果" },
@@ -178,6 +180,22 @@ export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
       { name: "沙漠适应", description: "在沙地地形移动速度加倍。" }
     ],
     creator: "GM",
+    owner: "-"
+  },
+  [CardType.WHEELCHAIR]: {
+    name: "改进型轻型框架轮椅",
+    frameType: "轻型框架",
+    tier: "2",
+    trait: "敏捷",
+    range: "近战",
+    damage: "d8+3 物理",
+    burden: "单手操控",
+    evasionMod: "无",
+    feature: "快速：当你进行攻击时，你可以标记 1 压力点，以射程内下一生物为目标。",
+    actions: "• 我推到门边，看看门是不是开着的。\n• 我把轮椅推到人群中，问问发生了什么。\n• 我拉下刹车，急停，然后在座位上转身，用弓对准入侵者。",
+    consequences: "• 我拉下刹车，但没想到地面上碎石的影响。\n• 我小心撞上了一块坚冰，结果整个滑了出去，超出了目标位置。\n• 我想要发力追击，但前轮卡在路面裂缝中，让我稍微停顿了一下。",
+    description: "在《匕首之心》中为行动受限的角色量身定制的轻型机动战斗轮椅，在保证高机动性的同时具备防卫性物理杀伤力。",
+    creator: "Mark Thompson",
     owner: "-"
   },
   [CardType.MADNESS]: {

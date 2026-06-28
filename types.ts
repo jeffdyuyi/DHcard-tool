@@ -22,7 +22,8 @@ export enum CardType {
   PROPHECY = 'prophecy',
   QUESTION = 'question',
   QUEST = 'quest',
-  SUB_WEAPON = 'subweapon'
+  SUB_WEAPON = 'subweapon',
+  WHEELCHAIR = 'wheelchair'
 }
 
 export interface BaseCardData {
@@ -212,6 +213,19 @@ export interface SubWeaponData extends BaseCardData {
   feature: string;
 }
 
+export interface WheelchairData extends BaseCardData {
+  frameType: string;
+  tier: string;
+  trait: string;
+  range: string;
+  damage: string;
+  burden: string;
+  evasionMod: string;
+  feature: string;
+  actions: string;
+  consequences: string;
+}
+
 // Union type for all card data
 export type CardData = 
   | WeaponData 
@@ -236,7 +250,8 @@ export type CardData =
   | ProphecyData
   | QuestionData
   | QuestData
-  | SubWeaponData;
+  | SubWeaponData
+  | WheelchairData;
 
 export interface LibraryItem {
   id: string;

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData } from '../types';
+import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData } from '../types';
 import { TOOL_CONFIG } from '../constants';
 import { Plus, Trash2 } from 'lucide-react';
 import RichTextArea from './RichTextArea';
@@ -476,6 +476,25 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
             <Input label="危险等级" value={q.dangerLevel || ''} onChange={v => handleChange('dangerLevel', v)} placeholder="例如: 中等 (危险骰 d8)" full />
             <TextArea label="任务目标" value={q.objectives || ''} onChange={v => handleChange('objectives', v)} placeholder="填写任务的具体目标，可分行描述..." />
             <TextArea label="任务奖励" value={q.reward || ''} onChange={v => handleChange('reward', v)} placeholder="任务完成后可获得的奖励..." />
+          </>
+        );
+      }
+      case CardType.WHEELCHAIR: {
+        const w = data as WheelchairData;
+        return (
+          <>
+            <div className="grid grid-cols-2 gap-4 col-span-2">
+              <Input label="框架型号" value={w.frameType || ''} onChange={v => handleChange('frameType', v)} placeholder="例如: 轻型框架" />
+              <Input label="位阶" value={w.tier || ''} onChange={v => handleChange('tier', v)} placeholder="例如: 2" />
+              <Input label="使用属性" value={w.trait || ''} onChange={v => handleChange('trait', v)} placeholder="例如: 敏捷" />
+              <Input label="射程距离" value={w.range || ''} onChange={v => handleChange('range', v)} placeholder="例如: 近战" />
+              <Input label="伤害骰" value={w.damage || ''} onChange={v => handleChange('damage', v)} placeholder="例如: d8+3 物理" />
+              <Input label="操控负荷" value={w.burden || ''} onChange={v => handleChange('burden', v)} placeholder="例如: 单手操控" />
+              <Input label="闪避值修正" value={w.evasionMod || ''} onChange={v => handleChange('evasionMod', v)} placeholder="例如: 无 / -1" full />
+            </div>
+            <TextArea label="核心特性" value={w.feature || ''} onChange={v => handleChange('feature', v)} placeholder="例如: 快速：当你进行攻击时..." />
+            <TextArea label="动作与移动" value={w.actions || ''} onChange={v => handleChange('actions', v)} placeholder="动作示例描述..." />
+            <TextArea label="判定后果" value={w.consequences || ''} onChange={v => handleChange('consequences', v)} placeholder="判定后果示例描述..." />
           </>
         );
       }

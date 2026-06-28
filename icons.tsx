@@ -3,7 +3,7 @@ import React from 'react';
 import { CardType } from './types';
 import { 
   Sword, Shield, Gem, FlaskConical, Flame, ScrollText, Crown, Sparkles, Dna, Tent, UserCircle2, Skull, Carrot, Utensils,
-  Moon as MoonIcon, Hammer, Ship, Brain, Search, Eye, HelpCircle, Compass, Swords
+  Moon as MoonIcon, Hammer, Ship, Brain, Search, Eye, HelpCircle, Compass, Swords, Accessibility
 } from 'lucide-react';
 
 export const TOOL_ICONS: Record<CardType, React.ReactNode> = {
@@ -25,6 +25,7 @@ export const TOOL_ICONS: Record<CardType, React.ReactNode> = {
   [CardType.TRANSFORMATION]: <MoonIcon size={24} strokeWidth={1.5} />,
   [CardType.MATERIAL]: <Hammer size={24} strokeWidth={1.5} />,
   [CardType.VEHICLE]: <Ship size={24} strokeWidth={1.5} />,
+  [CardType.WHEELCHAIR]: <Accessibility size={24} strokeWidth={1.5} />,
   [CardType.MADNESS]: <Brain size={24} strokeWidth={1.5} />,
   [CardType.CLUE]: <Search size={24} strokeWidth={1.5} />,
   [CardType.PROPHECY]: <Eye size={24} strokeWidth={1.5} />,
