@@ -217,11 +217,7 @@ export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
   },
   [CardType.STRONGHOLD]: {
     name: "红枫避难所",
-    strongholdType: "大型（整体）",
-    requirements: "石料 x20, 木材 x30, 铁矿石 x5",
     functions: "• 休憩点：在此进行长休时，全员额外恢复 1点压力点。\n• 简易工坊：可在此制作普通等级的药剂与消耗品。",
-    upkeep: "每周 15 枚金币 或 3 单位食物",
-    capacity: "最多容纳 10 名非战斗成员 / 4 名驻守人员",
     restrictions: "位置固定：据点无法移动。若暴露在敌人视野中可能遭遇突袭。",
     description: "坐落在红枫谷峭壁上的半隐藏式要塞，地势险要，易守难攻。",
     creator: "GM",

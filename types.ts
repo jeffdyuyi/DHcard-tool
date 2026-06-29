@@ -238,11 +238,7 @@ export interface AnomalyData extends BaseCardData {
 }
 
 export interface StrongholdData extends BaseCardData {
-  strongholdType: string;
-  requirements: string;
   functions: string;
-  upkeep: string;
-  capacity: string;
   restrictions: string;
 }
 

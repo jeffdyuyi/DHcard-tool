@@ -789,12 +789,6 @@ const CardPreview: React.FC<Props> = ({ data, elementId }) => {
         return (
           <>
             <Header title={s.name} type="据点" />
-            <div className="grid grid-cols-2 gap-2 mb-3">
-              <KeyValue label="据点分类" value={s.strongholdType || '-'} />
-              <KeyValue label="建造要求" value={s.requirements || '-'} />
-              {s.upkeep && <KeyValue label="维护成本" value={s.upkeep} />}
-              {s.capacity && <KeyValue label="驻守上限" value={s.capacity} />}
-            </div>
 
             <div className="flex-grow flex flex-col gap-3">
               <div className="bg-amber-50/50 dark:bg-amber-950/10 p-3 rounded border border-amber-200 dark:border-amber-900/30 shadow-sm flex-grow">

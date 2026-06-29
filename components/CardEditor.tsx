@@ -516,23 +516,7 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
         const s = data as StrongholdData;
         return (
           <>
-            <div className="col-span-2">
-              <label className="block text-xs font-bold text-slate-700 dark:text-zinc-400 mb-1">据点分类</label>
-              <select
-                className="w-full bg-white dark:bg-zinc-950 border border-slate-300 dark:border-zinc-700 rounded px-3 py-2 text-sm text-slate-800 dark:text-zinc-100"
-                value={s.strongholdType || ''}
-                onChange={e => handleChange('strongholdType', e.target.value)}
-              >
-                <option value="大型（整体）">大型（整体）</option>
-                <option value="小型（房间）">小型（房间）</option>
-              </select>
-            </div>
-            <Input label="建造要求" value={s.requirements || ''} onChange={v => handleChange('requirements', v)} placeholder="例如: 石料 x20, 木材 x30" full />
             <TextArea label="据点功能" value={s.functions || ''} onChange={v => handleChange('functions', v)} placeholder="据点所能提供的休息、制造或防御加成描述..." />
-            <div className="grid grid-cols-2 gap-4 col-span-2">
-              <Input label="维护成本 (可选)" value={s.upkeep || ''} onChange={v => handleChange('upkeep', v)} placeholder="例如: 每周 15 枚金币" />
-              <Input label="驻守上限 (可选)" value={s.capacity || ''} onChange={v => handleChange('capacity', v)} placeholder="例如: 10名非战斗成员 / 4名驻守人员" />
-            </div>
             <TextArea label="特殊限制 (可选)" value={s.restrictions || ''} onChange={v => handleChange('restrictions', v)} placeholder="据点的负面效果或限制，例如：位置固定，无法移动..." />
           </>
         );
