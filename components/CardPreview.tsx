@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData, EnvironmentData } from '../types';
+import { CardData, CardType, WeaponData, ArmorData, NpcData, ClassData, DomainData, SubclassData, AncestryData, CommunityData, StoryData, LootData, ConsumableData, CalamityData, IngredientData, MealData, TransformationData, MaterialData, VehicleData, MadnessData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData, EnvironmentData, LandmarkData } from '../types';
 import { Markdown, parseInline } from './Markdown';
 
 interface Props {
@@ -807,6 +807,43 @@ const CardPreview: React.FC<Props> = ({ data, elementId }) => {
             {s.description && (
               <div className="mt-4 pt-3 border-t border-slate-200 dark:border-zinc-800/50">
                 <Markdown text={s.description} className="italic text-xs text-slate-500 dark:text-zinc-500" />
+              </div>
+            )}
+          </>
+        );
+      }
+      case CardType.LANDMARK: {
+        const lm = data as LandmarkData;
+        return (
+          <>
+            <Header title={lm.name} type="地标" />
+
+            <div className="flex-grow flex flex-col gap-3">
+              {lm.appearance && (
+                <div className="bg-slate-50 dark:bg-zinc-900/40 p-3 rounded border border-slate-200 dark:border-zinc-800/50">
+                  <h3 className="text-slate-700 dark:text-zinc-400 text-xs font-bold uppercase tracking-wider mb-1">外观</h3>
+                  <Markdown text={lm.appearance} className="text-sm text-slate-800 dark:text-zinc-200 leading-relaxed" />
+                </div>
+              )}
+
+              {lm.functions && (
+                <div className="bg-emerald-50/50 dark:bg-emerald-950/10 p-3 rounded border border-emerald-200 dark:border-emerald-900/30 shadow-sm flex-grow">
+                  <h3 className="text-emerald-800 dark:text-emerald-500 text-xs font-bold uppercase tracking-wider mb-1">功能</h3>
+                  <Markdown text={lm.functions} className="text-sm text-slate-800 dark:text-zinc-200 leading-relaxed" />
+                </div>
+              )}
+
+              {lm.notes && (
+                <div className="bg-amber-50/50 dark:bg-amber-950/10 p-3 border-l-4 border-amber-500 dark:border-amber-600 rounded-r shadow-sm">
+                  <h3 className="text-amber-800 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">特殊备注</h3>
+                  <Markdown text={lm.notes} className="text-xs text-slate-700 dark:text-zinc-300 leading-relaxed" />
+                </div>
+              )}
+            </div>
+
+            {lm.description && (
+              <div className="mt-4 pt-3 border-t border-slate-200 dark:border-zinc-800/50">
+                <Markdown text={lm.description} className="italic text-xs text-slate-500 dark:text-zinc-500" />
               </div>
             )}
           </>

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData, EnvironmentData, EnvironmentFeature } from '../types';
+import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData, EnvironmentData, EnvironmentFeature, LandmarkData } from '../types';
 import { TOOL_CONFIG } from '../constants';
 import { Plus, Trash2 } from 'lucide-react';
 import RichTextArea from './RichTextArea';
@@ -518,6 +518,16 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
           <>
             <TextArea label="据点功能" value={s.functions || ''} onChange={v => handleChange('functions', v)} placeholder="据点所能提供的休息、制造或防御加成描述..." />
             <TextArea label="特殊限制 (可选)" value={s.restrictions || ''} onChange={v => handleChange('restrictions', v)} placeholder="据点的负面效果或限制，例如：位置固定，无法移动..." />
+          </>
+        );
+      }
+      case CardType.LANDMARK: {
+        const lm = data as LandmarkData;
+        return (
+          <>
+            <TextArea label="外观" value={lm.appearance || ''} onChange={v => handleChange('appearance', v)} placeholder="这个地点看起来是什么模样？建筑、地形、地貌、规模..." />
+            <TextArea label="功能" value={lm.functions || ''} onChange={v => handleChange('functions', v)} placeholder="这个地点具有哪些实用功能或加成？" />
+            <TextArea label="特殊备注 (可选)" value={lm.notes || ''} onChange={v => handleChange('notes', v)} placeholder="例如：传说、秘密、居民警告、GM备忘..." />
           </>
         );
       }

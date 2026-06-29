@@ -39,7 +39,8 @@ export const TOOL_CATEGORIES: Record<CardCategory, CardType[]> = {
     CardType.MADNESS,
     CardType.PROPHECY,
     CardType.QUEST,
-    CardType.ENVIRONMENT
+    CardType.ENVIRONMENT,
+    CardType.LANDMARK
   ],
   [CardCategory.HERO]: [
     CardType.CLASS, 
@@ -79,6 +80,7 @@ export const TOOL_CONFIG: Record<CardType, { label: string; color: string; descr
   [CardType.QUESTION]: { label: "问题", color: "text-indigo-600", description: "建立世界观的引导性问题" },
   [CardType.QUEST]: { label: "任务", color: "text-amber-600", description: "设计冒险任务与赏金合约" },
   [CardType.ENVIRONMENT]: { label: "环境", color: "text-teal-500", description: "设计场景环境与地形江山" },
+  [CardType.LANDMARK]: { label: "地标", color: "text-emerald-600", description: "设计与记录地标建筑、地点或区域" },
 };
 
 export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
@@ -287,6 +289,15 @@ export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
         guidingQuestion: "河床上散落着哪些小物件和饰品？这片水域是否存在掠食者？"
       }
     ],
+    creator: "GM",
+    owner: "-"
+  },
+  [CardType.LANDMARK]: {
+    name: "风鸣尖塔",
+    appearance: "一座五层塔楼，唐期风格建筑，湖绿色的琪岩遗址被屨萤草包围。塔顶层毫无掩诚地立于平原之上，易于远望识别。",
+    functions: "导航地标：背袭者在五公里内可看到塔顶，远射程内当作定位参照点。",
+    notes: "居民传言尖塔里住着小哭鬼，夜长可能听到妖异的筛嫃声。",
+    description: "尖塔屋榖挂着漂空的鸣帖，在广阔空旷的原野上发出忧郁的低迟回响。",
     creator: "GM",
     owner: "-"
   }

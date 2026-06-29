@@ -26,7 +26,8 @@ export enum CardType {
   WHEELCHAIR = 'wheelchair',
   ANOMALY = 'anomaly',
   STRONGHOLD = 'stronghold',
-  ENVIRONMENT = 'environment'
+  ENVIRONMENT = 'environment',
+  LANDMARK = 'landmark'
 }
 
 export interface BaseCardData {
@@ -260,6 +261,12 @@ export interface EnvironmentData extends BaseCardData {
   features: EnvironmentFeature[];
 }
 
+export interface LandmarkData extends BaseCardData {
+  appearance: string; // 外观
+  functions: string;  // 功能
+  notes: string;      // 特殊备注
+}
+
 // Union type for all card data
 export type CardData = 
   | WeaponData 
@@ -288,7 +295,8 @@ export type CardData =
   | WheelchairData
   | AnomalyData
   | StrongholdData
-  | EnvironmentData;
+  | EnvironmentData
+  | LandmarkData;
 
 export interface LibraryItem {
   id: string;
