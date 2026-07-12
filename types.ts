@@ -82,6 +82,9 @@ export interface ClassData extends BaseCardData {
   spellcastingAttribute: string; 
   classFeature: string;
   hopeFeature: string;
+  domain1: string;
+  domain2: string;
+  startingItems: string;
 }
 
 export interface SubclassData extends BaseCardData {

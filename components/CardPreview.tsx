@@ -188,15 +188,31 @@ const CardPreview: React.FC<Props> = ({ data, elementId }) => {
         return (
           <>
             <Header title={d.name} type="职业" />
-            <div className="flex gap-4 mb-6">
+            <div className="flex gap-4 mb-4">
               <StatBox label="基础闪避" value={d.evasion} />
               <StatBox label="基础 HP" value={d.hp} colorClass="text-red-700 dark:text-red-400" />
               {d.spellcastingAttribute && <StatBox label="施法属性" value={d.spellcastingAttribute} colorClass="text-purple-700 dark:text-purple-400" />}
             </div>
+            
+            <div className="grid grid-cols-2 gap-2 mb-4 bg-slate-50 dark:bg-zinc-900/30 p-2.5 rounded border border-slate-200 dark:border-zinc-800/80 text-xs text-slate-700 dark:text-zinc-300">
+              <div>
+                <span className="font-bold text-slate-500 dark:text-zinc-500 block uppercase mb-0.5">领域 1</span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-zinc-200">{d.domain1 || '-'}</span>
+              </div>
+              <div>
+                <span className="font-bold text-slate-500 dark:text-zinc-500 block uppercase mb-0.5">领域 2</span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-zinc-200">{d.domain2 || '-'}</span>
+              </div>
+              <div className="col-span-2 mt-1 border-t border-slate-200 dark:border-zinc-800/50 pt-1.5">
+                <span className="font-bold text-slate-500 dark:text-zinc-500 block uppercase mb-0.5">起始物品</span>
+                <span className="text-sm text-slate-900 dark:text-zinc-200">{d.startingItems || '-'}</span>
+              </div>
+            </div>
+
             <Section title="职业特性">
               <Markdown text={d.classFeature} />
             </Section>
-            <Section title="希望特性 (3希望)">
+            <Section title="希望特性">
               <Markdown text={d.hopeFeature} className="text-blue-800 dark:text-amber-200" />
             </Section>
             <div className="mt-auto pt-4">

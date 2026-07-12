@@ -129,15 +129,21 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
           </>
         );
       case CardType.CLASS:
+        const cls = data as ClassData;
         return (
           <>
             <div className="grid grid-cols-2 gap-4 col-span-2">
-              <Input label="基础闪避" value={(data as any).evasion} onChange={v => handleChange('evasion', v)} />
-              <Input label="基础HP" value={(data as any).hp} onChange={v => handleChange('hp', v)} />
+              <Input label="基础闪避" value={cls.evasion} onChange={v => handleChange('evasion', v)} />
+              <Input label="基础HP" value={cls.hp} onChange={v => handleChange('hp', v)} />
             </div>
-            <Input label="施法属性 (可选)" value={(data as ClassData).spellcastingAttribute} onChange={v => handleChange('spellcastingAttribute', v)} placeholder="例如: 智力" full />
-            <TextArea label="职业特性" value={(data as any).classFeature} onChange={v => handleChange('classFeature', v)} />
-            <TextArea label="希望特性" value={(data as any).hopeFeature} onChange={v => handleChange('hopeFeature', v)} />
+            <div className="grid grid-cols-2 gap-4 col-span-2">
+              <Input label="领域 1" value={cls.domain1 || ''} onChange={v => handleChange('domain1', v)} placeholder="例如: 刀锋" />
+              <Input label="领域 2" value={cls.domain2 || ''} onChange={v => handleChange('domain2', v)} placeholder="例如: 骨气" />
+            </div>
+            <Input label="起始物品" value={cls.startingItems || ''} onChange={v => handleChange('startingItems', v)} placeholder="例如: 一把长剑、一副胸甲、冒险者包袋" full />
+            <Input label="施法属性 (可选)" value={cls.spellcastingAttribute} onChange={v => handleChange('spellcastingAttribute', v)} placeholder="例如: 智力" full />
+            <TextArea label="职业特性" value={cls.classFeature} onChange={v => handleChange('classFeature', v)} />
+            <TextArea label="希望特性" value={cls.hopeFeature} onChange={v => handleChange('hopeFeature', v)} />
           </>
         );
       case CardType.SUBCLASS:

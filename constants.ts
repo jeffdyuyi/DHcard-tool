@@ -106,7 +106,7 @@ export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
     name: "复仇誓言", trigger: "当你对仇敌造成伤害时", effect: "标记1点压力，伤害+2。", description: "你不会忘记那一天。", creator: "GM", owner: "-"
   },
   [CardType.CLASS]: {
-    name: "战士", evasion: "8", hp: "6", spellcastingAttribute: "", classFeature: "战斗风格：选择一种武器类型获得专精。", hopeFeature: "花费2希望，回复1d4 HP。", description: "战场上的大师。", creator: "GM", owner: "-"
+    name: "战士", evasion: "8", hp: "6", spellcastingAttribute: "", classFeature: "战斗风格：选择一种武器类型获得专精。", hopeFeature: "花费2希望，回复1d4 HP。", domain1: "刀锋", domain2: "骨气", startingItems: "一把长剑、一副胸甲、冒险者包袋", description: "战场上的大师。", creator: "GM", owner: "-"
   },
   [CardType.SUBCLASS]: {
     name: "狂战士", baseClass: "战士", spellcastingAttribute: "", foundationFeature: "狂暴：伤害+2，但受到伤害+1。", masteryFeature: "不灭：HP归零时，掷d20，若>10则保留1HP。", description: "怒火是你的力量源泉。", creator: "GM", owner: "-"
