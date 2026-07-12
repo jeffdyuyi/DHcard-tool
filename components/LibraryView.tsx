@@ -115,7 +115,7 @@ const LibraryView: React.FC<Props> = ({ library, isDark, onToggleTheme, onGoHome
   };
 
   return (
-    <div className="min-h-screen bg-paper-50 dark:bg-zinc-950 transition-colors duration-500 flex flex-col relative">
+    <div className="min-h-screen bg-parchment-50 dark:bg-obsidian-900 transition-colors duration-500 flex flex-col relative">
          <header className="h-16 flex items-center justify-between px-4 md:px-8 border-b border-slate-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-20">
              <div className="flex items-center gap-4">
                 <button onClick={onGoHome} className="p-2 -ml-2 rounded-full hover:bg-slate-100 dark:hover:bg-zinc-800 transition-colors">
@@ -143,7 +143,7 @@ const LibraryView: React.FC<Props> = ({ library, isDark, onToggleTheme, onGoHome
                         </>
                       ) : (
                         <>
-                          <Download size={16} /> 导出DaggerHeart卡包
+                          <Download size={16} /> 导出匕首心卡包
                         </>
                       )}
                    </button>
@@ -257,7 +257,7 @@ const LibraryView: React.FC<Props> = ({ library, isDark, onToggleTheme, onGoHome
                   <div className="p-6 border-b border-slate-100 dark:border-zinc-800/80 flex justify-between items-center">
                      <h3 className="text-lg font-serif font-bold text-slate-800 dark:text-zinc-200 flex items-center gap-2">
                         <Download size={20} className="text-amber-500" />
-                        导出DaggerHeart卡牌包
+                        导出匕首心卡牌包
                      </h3>
                      <button onClick={() => setShowExportModal(false)} className="text-slate-400 hover:text-slate-600 dark:hover:text-zinc-300">
                         <X size={20} />
@@ -267,7 +267,7 @@ const LibraryView: React.FC<Props> = ({ library, isDark, onToggleTheme, onGoHome
                   <div className="p-6 space-y-4">
                      <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/30 p-3 rounded-lg text-xs text-amber-800 dark:text-amber-400 leading-relaxed">
                         您已选择 <span className="font-bold text-sm text-amber-600 dark:text-amber-500 mx-1">{selectedIds.size}</span> 张卡牌。
-                        即将根据DaggerHeart建卡器规范，将这些卡牌转换为兼容的 JSON 格式卡包。
+                        即将根据匕首心建卡器规范，将这些卡牌转换为兼容的 JSON 格式卡包。
                      </div>
 
                      <div className="flex flex-col gap-1.5">

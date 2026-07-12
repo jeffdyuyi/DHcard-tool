@@ -14,10 +14,10 @@ const Wrapper = ({ children, className = "", id }: { children?: React.ReactNode;
   <div 
     id={id || "card-preview"}
     className={`relative w-[400px] min-h-[560px] flex flex-col p-6 overflow-hidden transition-colors duration-300
-      bg-white text-slate-900 border-[6px] border-double border-slate-800
+      bg-parchment-50 text-ink-900 border-[6px] border-double border-ink-800/40
       dark:bg-zinc-950 dark:text-zinc-200 dark:border-amber-700/60 dark:shadow-2xl
       ${className}`}
-    style={{ fontFamily: '"Noto Sans SC", sans-serif' }}
+    style={{ fontFamily: '"Noto Serif SC", "Noto Sans SC", serif' }}
   >
     {/* 
       FIX: Replaced external texture URLs with inline SVG Data URIs.
@@ -50,10 +50,10 @@ const Wrapper = ({ children, className = "", id }: { children?: React.ReactNode;
 const Header = ({ title, subtitle, type }: { title: string, subtitle?: string, type: string }) => (
   <div className="border-b-2 border-slate-800/20 dark:border-amber-800/50 pb-3 mb-4">
     <div className="flex justify-between items-baseline">
-      <h2 className="text-2xl font-serif font-bold text-blue-900 dark:text-amber-500 tracking-wide whitespace-pre-wrap">{title}</h2>
-      <span className="text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-500 font-serif ml-2 shrink-0">{type}</span>
+      <h2 className="text-2xl font-serif font-bold text-blue-900 dark:text-amber-500 tracking-wide whitespace-pre-wrap" style={{ fontFamily: '"Noto Serif SC", serif' }}>{title}</h2>
+      <span className="text-xs uppercase tracking-widest text-slate-500 dark:text-zinc-500 ml-2 shrink-0" style={{ fontFamily: '"Noto Sans SC", sans-serif' }}>{type}</span>
     </div>
-    {subtitle && <div className="text-sm text-slate-600 dark:text-zinc-400 italic font-serif mt-1">{subtitle}</div>}
+    {subtitle && <div className="text-sm text-slate-600 dark:text-zinc-400 italic mt-1" style={{ fontFamily: '"Noto Serif SC", serif' }}>{subtitle}</div>}
   </div>
 );
 
@@ -79,9 +79,9 @@ const StatBox = ({ label, value, colorClass = "text-blue-800 dark:text-amber-500
 );
 
 const Footer = ({ creator, owner }: { creator: string, owner: string }) => (
-  <div className="mt-4 pt-2 border-t border-slate-200 dark:border-zinc-800 flex justify-between items-center text-[10px] text-slate-400 dark:text-zinc-600 uppercase font-serif tracking-widest">
-    <span>Designed by {creator || 'Unknown'}</span>
-    <span>{owner || 'Unassigned'}</span>
+  <div className="mt-4 pt-2 border-t border-slate-200 dark:border-zinc-800 flex justify-between items-center text-[10px] text-slate-400 dark:text-zinc-600 uppercase tracking-widest" style={{ fontFamily: '"Noto Sans SC", sans-serif' }}>
+    <span>制作者 {creator || '未知'}</span>
+    <span>{owner || '未指定'}</span>
   </div>
 );
 
@@ -498,9 +498,9 @@ const CardPreview: React.FC<Props> = ({ data, elementId }) => {
 
                 <div className="mt-auto pt-4 border-t border-slate-200 dark:border-zinc-800/50">
                     <div className="flex justify-between text-[10px] text-rose-300 dark:text-rose-900 uppercase font-bold tracking-widest">
-                       <span>TRANSFORMATION</span>
-                       <span>DAGGERHEART</span>
-                    </div>
+                       <span>转变卡</span>
+                       <span>匕首心</span>
+                     </div>
                 </div>
             </>
         );

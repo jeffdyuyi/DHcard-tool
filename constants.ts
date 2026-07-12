@@ -208,7 +208,7 @@ export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
   },
   [CardType.ANOMALY]: {
     name: "无光之镜",
-    containmentClass: "欧几里得 (Euclid)",
+    containmentClass: "欧几里得",
     source: "深渊裂隙",
     procedures: "必须放置在完全不透光的黑曜石匣中，任何时候不得用肉眼直接注视镜面。",
     effects: "折射：当被激活时，可以投射出一个与目标完全相同的幻影，持续1分钟。",
@@ -281,7 +281,7 @@ export const DEFAULT_VALUES: Record<CardType, Partial<CardData>> = {
     description: "湍急的河水在乱石间奔腾怒吼，白色的泡沫翻涌不息。",
     features: [
       {
-        name: "暗流 Undertow",
+        name: "暗流",
         type: "被动",
         isFear: false,
         fearCost: "",

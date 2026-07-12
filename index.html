@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="zh-CN" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,20 +19,41 @@
               amber: {
                 450: '#f59e0b',
               },
-              // Custom colors for light theme (Paper/Ink style)
-              ink: {
-                900: '#0f172a', // Very dark slate
-                800: '#1e293b',
-                600: '#475569',
+              // 亮色主题：羊皮纸卷轴色系
+              parchment: {
+                50:  '#FAF6EB',  // 最浅羊皮，页面底色
+                100: '#F5EBD0',  // 标准羊皮
+                200: '#ECD9B0',  // 深羊皮，分隔线用
+                300: '#D4B896',  // 古铜辅色
               },
+              ink: {
+                900: '#1A1A3E',  // 深黛，主文字
+                800: '#2C2C55',  // 次级标题
+                700: '#3E3E6E',  // 辅助文字
+                600: '#5A5A88',  // 占位符
+              },
+              // 暗色主题：黑曜石密室色系
+              obsidian: {
+                950: '#0E0E12',  // 最深背景
+                900: '#14141A',  // 页面底色
+                800: '#1A1A24',  // 卡片/面板
+                700: '#22222E',  // 悬浮元素
+                600: '#2C2C3E',  // 边框/分隔
+              },
+              gold: {
+                400: '#E8C97A',  // 琥珀金，暗色主高亮
+                300: '#F0DA9A',  // 亮琥珀金
+                600: '#B8992A',  // 深金，边框
+              },
+              // 兼容旧 paper 类名
               paper: {
-                50: '#f8fafc',
-                100: '#f1f5f9',
+                50: '#FAF6EB',
+                100: '#F5EBD0',
               }
             },
             fontFamily: {
               serif: ['"Noto Serif SC"', 'serif'],
-              sans: ['"Noto Sans SC"', 'sans-serif'],
+              sans:  ['"Noto Sans SC"', 'sans-serif'],
             }
           }
         }
@@ -41,7 +62,7 @@
     <!-- Fonts for aesthetic -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
       /* Custom scrollbar for dark theme */
       .dark ::-webkit-scrollbar {
@@ -90,7 +111,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-paper-50 text-slate-800 dark:bg-zinc-900 dark:text-zinc-200 min-h-screen antialiased selection:bg-blue-100 selection:text-blue-900 dark:selection:bg-amber-900 dark:selection:text-amber-100 transition-colors duration-300">
+  <body class="bg-parchment-50 text-ink-900 dark:bg-obsidian-900 dark:text-zinc-200 min-h-screen antialiased selection:bg-amber-100 selection:text-amber-900 dark:selection:bg-gold-600/40 dark:selection:text-gold-300 transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

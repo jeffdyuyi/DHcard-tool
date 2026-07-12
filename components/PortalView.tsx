@@ -18,7 +18,7 @@ const CATEGORY_ORDER = [CardCategory.COLLECTION, CardCategory.WORLD, CardCategor
 
 const PortalView: React.FC<Props> = ({ library, isDark, onToggleTheme, onGoToLibrary, onSelectTool, onSelectLibItem }) => {
   return (
-    <div className="min-h-screen bg-paper-50 dark:bg-zinc-950 transition-colors duration-500 overflow-x-hidden">
+    <div className="min-h-screen bg-parchment-50 dark:bg-obsidian-900 transition-colors duration-500 overflow-x-hidden">
         <div className="fixed inset-0 pointer-events-none overflow-hidden">
            <div className="absolute -top-20 -right-20 w-96 h-96 bg-blue-500/10 dark:bg-amber-500/5 rounded-full blur-3xl"></div>
            <div className="absolute top-40 -left-20 w-72 h-72 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-3xl"></div>
@@ -55,7 +55,7 @@ const PortalView: React.FC<Props> = ({ library, isDark, onToggleTheme, onGoToLib
                     </h2>
                   </div>
                   <span className="text-xs text-slate-500 dark:text-zinc-500 font-mono">
-                    {library.length} items
+                    共 {library.length} 张卡牌
                   </span>
                </div>
                

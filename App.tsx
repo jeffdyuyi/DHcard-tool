@@ -235,9 +235,9 @@ const App: React.FC = () => {
 
       {/* 3. Editor Mode */}
       {mode === 'editor' && (
-        <div className="flex h-screen bg-paper-50 dark:bg-zinc-950 overflow-hidden transition-colors duration-300">
-          <aside className={`hidden md:flex flex-col border-r border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 backdrop-blur-md transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-20'}`}>
-            <div className="p-4 flex items-center justify-between border-b border-slate-200 dark:border-zinc-800 h-16">
+        <div className="flex h-screen bg-parchment-50 dark:bg-obsidian-950 overflow-hidden transition-colors duration-300">
+          <aside className={`hidden md:flex flex-col border-r border-parchment-200 dark:border-obsidian-600 bg-parchment-50/95 dark:bg-obsidian-900/90 backdrop-blur-md transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-20'}`}>
+            <div className="p-4 flex items-center justify-between border-b border-parchment-200 dark:border-obsidian-600 h-16">
               <button onClick={goHome} className={`flex items-center gap-2 font-serif font-bold text-blue-900 dark:text-amber-500 overflow-hidden whitespace-nowrap ${!isSidebarOpen && 'hidden'}`}>
                 <span className="text-xl">工坊</span>
               </button>
@@ -272,18 +272,16 @@ const App: React.FC = () => {
 
             <div className="p-4 border-t border-slate-200 dark:border-zinc-800 space-y-2">
                 <button onClick={goToLibrary} className={`w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-600 dark:text-zinc-400 ${!isSidebarOpen && 'justify-center'}`}>
-                  <Library size={20} />
-                  {isSidebarOpen && <span className="text-sm">本地库</span>}
+                  {isSidebarOpen ? <span className="text-sm">个人藏品库</span> : <span className="text-xs font-bold">库</span>}
                 </button>
                 <button onClick={toggleTheme} className={`w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-600 dark:text-zinc-400 ${!isSidebarOpen && 'justify-center'}`}>
-                  {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                  {isSidebarOpen && <span className="text-sm">切换主题</span>}
+                  {isSidebarOpen ? <span className="text-sm">{isDark ? '切换至浅色' : '切换至深色'}</span> : <span className="text-xs">{isDark ? '浅' : '深'}</span>}
                 </button>
             </div>
           </aside>
 
           <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
-            <header className="h-16 flex items-center justify-between px-4 md:px-8 border-b border-slate-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-sm z-20">
+            <header className="h-16 flex items-center justify-between px-4 md:px-8 border-b border-parchment-200 dark:border-obsidian-600 bg-parchment-50/80 dark:bg-obsidian-900/80 backdrop-blur-sm z-20">
               <div className="flex items-center gap-4">
                   <button onClick={() => setIsMobileMenuOpen(true)} className="md:hidden p-2 -ml-2 text-slate-600 dark:text-zinc-400">
                     <Menu size={24} />
@@ -299,19 +297,19 @@ const App: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                  <button onClick={() => selectTool(currentTool)} className="p-2 text-slate-500 hover:text-blue-600 dark:text-zinc-400 dark:hover:text-amber-500" title="重置">
-                    <RotateCcw size={20} />
+                  <button onClick={() => selectTool(currentTool)} className="px-3 py-2 text-sm font-medium text-slate-500 hover:text-blue-700 dark:text-zinc-400 dark:hover:text-amber-400 transition-colors" title="重置">
+                    重置
                   </button>
-                  <div className="h-6 w-px bg-slate-300 dark:bg-zinc-700 mx-2"></div>
+                  <div className="h-6 w-px bg-slate-300 dark:bg-zinc-700 mx-1"></div>
                   <input type="file" ref={fileInputRef} onChange={handleFileUpload} accept="image/png,application/json" className="hidden" />
                   <button onClick={() => fileInputRef.current?.click()} className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-md hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors">
-                    <Upload size={16} /> <span className="hidden sm:inline">导入</span>
+                    导入卡牌
                   </button>
                   <button onClick={exportJson} className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-md hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors">
-                    <FileJson size={16} /> <span className="hidden sm:inline">导出JSON</span>
+                    导出 JSON
                   </button>
-                  <button onClick={handleSaveClick} className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-md hover:bg-slate-50 dark:hover:bg-zinc-800 transition-colors">
-                    <Save size={16} /> <span className="hidden sm:inline">保存</span>
+                  <button onClick={handleSaveClick} className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-white bg-blue-600 dark:bg-amber-600 border border-blue-600 dark:border-amber-600 rounded-md hover:bg-blue-700 dark:hover:bg-amber-700 transition-colors shadow-sm">
+                    保存到本地
                   </button>
               </div>
             </header>
@@ -331,21 +329,21 @@ const App: React.FC = () => {
                     </div>
                     
                     <div className="flex w-full gap-4 max-w-[400px]">
-                      <button onClick={() => copyImageToClipboard('preview-editor')} className="flex-1 flex items-center justify-center gap-2 py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-lg text-slate-700 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-zinc-700 transition-colors font-medium shadow-sm">
-                        <Copy size={18} /> 复制
-                      </button>
-                      <button onClick={() => saveCardAsImage('preview-editor', cardData, cardData.name)} className="flex-1 flex items-center justify-center gap-2 py-3 bg-blue-600 dark:bg-amber-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-amber-700 transition-colors font-medium shadow-md">
-                        <Download size={18} /> 下载
-                      </button>
-                    </div>
+                       <button onClick={() => copyImageToClipboard('preview-editor')} className="flex-1 flex items-center justify-center gap-2 py-3 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 rounded-lg text-slate-700 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-zinc-700 transition-colors font-medium shadow-sm">
+                         复制图片
+                       </button>
+                       <button onClick={() => saveCardAsImage('preview-editor', cardData, cardData.name)} className="flex-1 flex items-center justify-center gap-2 py-3 bg-blue-600 dark:bg-amber-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-amber-700 transition-colors font-medium shadow-md">
+                         下载卡牌
+                       </button>
+                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="lg:hidden fixed bottom-6 right-6 z-30">
-              <button onClick={() => setShowMobilePreview(true)} className="flex items-center gap-2 px-6 py-4 bg-blue-600 dark:bg-amber-600 text-white rounded-full shadow-xl shadow-blue-900/30 dark:shadow-amber-900/30 hover:scale-105 transition-transform font-bold">
-                <Eye size={20} /> 预览卡牌
+              <button onClick={() => setShowMobilePreview(true)} className="px-6 py-4 bg-blue-600 dark:bg-amber-600 text-white rounded-full shadow-xl shadow-blue-900/30 dark:shadow-amber-900/30 hover:scale-105 transition-transform font-bold text-sm">
+                展开卡牌预览
               </button>
             </div>
           </main>

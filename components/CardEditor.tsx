@@ -2,7 +2,6 @@
 import React from 'react';
 import { CardData, CardType, NpcData, NpcFeature, IngredientData, IngredientFlavor, MealComponent, MealData, SubclassData, TransformationData, TransformationFeature, MaterialData, MaterialFeature, VehicleData, VehicleArmament, VehicleFeature, MadnessData, ClassData, DomainData, CommunityData, ClueData, ProphecyData, QuestionData, QuestData, SubWeaponData, WheelchairData, AnomalyData, StrongholdData, EnvironmentData, EnvironmentFeature, LandmarkData } from '../types';
 import { TOOL_CONFIG } from '../constants';
-import { Plus, Trash2 } from 'lucide-react';
 import RichTextArea from './RichTextArea';
 
 interface Props {
@@ -49,15 +48,15 @@ function ListEditor<T>({
     <div className="col-span-2 space-y-3 border-t border-slate-200 dark:border-zinc-800 pt-4 mt-2">
       <div className="flex justify-between items-center">
         <label className="text-xs font-bold text-zinc-500 uppercase">{title}</label>
-        <button onClick={onAdd} className="flex items-center gap-1 text-xs bg-slate-200 dark:bg-zinc-800 hover:bg-slate-300 dark:hover:bg-zinc-700 px-2 py-1 rounded text-slate-700 dark:text-amber-500 transition-colors">
-          <Plus size={14} /> 添加
+        <button onClick={onAdd} className="text-xs bg-slate-200 dark:bg-zinc-800 hover:bg-slate-300 dark:hover:bg-zinc-700 px-2.5 py-1 rounded text-slate-700 dark:text-amber-500 transition-colors font-medium">
+          ＋ 新增
         </button>
       </div>
       {items.map((item, i) => (
         <div key={i} className="relative group">
            {renderItem(item, i, (key, val) => onUpdate(i, key, val))}
-           <button onClick={() => onRemove(i)} className="absolute right-2 top-2.5 text-slate-400 dark:text-zinc-500 hover:text-red-500 p-1 z-10">
-              <Trash2 size={16} />
+           <button onClick={() => onRemove(i)} className="absolute right-2 top-2.5 text-[10px] font-bold text-slate-400 dark:text-zinc-600 hover:text-red-500 dark:hover:text-red-400 px-1.5 py-0.5 rounded hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors z-10">
+              删除
            </button>
         </div>
       ))}
@@ -436,8 +435,8 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
                     <button onClick={() => {
                         const currentOpts = (data as QuestionData).options || [];
                         handleChange('options', [...currentOpts, '']);
-                    }} className="flex items-center gap-1 text-xs bg-slate-200 dark:bg-zinc-800 hover:bg-slate-300 dark:hover:bg-zinc-700 px-2 py-1 rounded text-slate-700 dark:text-amber-500 transition-colors">
-                      <Plus size={14} /> 添加
+                    }} className="text-xs bg-slate-200 dark:bg-zinc-800 hover:bg-slate-300 dark:hover:bg-zinc-700 px-2.5 py-1 rounded text-slate-700 dark:text-amber-500 transition-colors font-medium">
+                      ＋ 新增
                     </button>
                  </div>
                  {((data as QuestionData).options || []).map((opt, i) => (
@@ -458,8 +457,8 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
                                const currentOpts = (data as QuestionData).options || [];
                                const newOpts = currentOpts.filter((_, idx) => idx !== i);
                                handleChange('options', newOpts);
-                           }} className="absolute right-2 top-2 text-slate-400 dark:text-zinc-500 hover:text-red-500 p-1">
-                              <Trash2 size={16} />
+                           }} className="absolute right-2 top-2 text-[10px] font-bold text-slate-400 dark:text-zinc-600 hover:text-red-500 dark:hover:text-red-400 px-1.5 py-0.5 rounded hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors">
+                              删除
                            </button>
                        )}
                     </div>
@@ -509,7 +508,7 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
         return (
           <>
             <div className="grid grid-cols-2 gap-4 col-span-2">
-              <Input label="收容等级" value={a.containmentClass || ''} onChange={v => handleChange('containmentClass', v)} placeholder="例如: 欧几里得 (Euclid)" />
+              <Input label="收容等级" value={a.containmentClass || ''} onChange={v => handleChange('containmentClass', v)} placeholder="例如: 欧几里得" />
               <Input label="发生源头" value={a.source || ''} onChange={v => handleChange('source', v)} placeholder="例如: 深渊裂隙" />
             </div>
             <TextArea label="收容措施" value={a.procedures || ''} onChange={v => handleChange('procedures', v)} placeholder="必须放置在完全不透光的黑曜石匣中..." />
@@ -565,10 +564,10 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
               onChange={e => handleChange('envType', e.target.value)}
               className="bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded px-3 py-2 text-slate-900 dark:text-zinc-200 focus:outline-none focus:border-teal-500 transition-colors"
             >
-              <option value="探索型">探索型 Explorations</option>
-              <option value="社交型">社交型 Socials</option>
-              <option value="险境型">险境型 Traversals</option>
-              <option value="事件型">事件型 Events</option>
+              <option value="探索型">探索型</option>
+              <option value="社交型">社交型</option>
+              <option value="险境型">险境型</option>
+              <option value="事件型">事件型</option>
             </select>
           </div>
         </div>
@@ -620,7 +619,7 @@ const CardEditor: React.FC<Props> = ({ data, onChange }) => {
                   className="flex-grow bg-white dark:bg-zinc-950 border border-slate-300 dark:border-zinc-700 rounded px-2 py-1 text-sm font-bold text-slate-900 dark:text-zinc-200"
                   value={f.name}
                   onChange={e => update('name', e.target.value)}
-                  placeholder="特性名称 (例如: 暗流 Undertow)"
+                  placeholder="特性名称 (例如: 暗流)"
                 />
                 <select
                   value={f.type}
